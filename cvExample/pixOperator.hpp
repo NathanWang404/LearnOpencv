@@ -26,7 +26,7 @@ public:
     //【22】用迭代器访问像素
     static void iterColorReduce(Mat &inputImage, Mat &outputImage, int div);
 
-    //【23】用动态地址计算配合at访问像素
+    //【23】用动态地址计算配合at访问像素 outputImage.at<Vec3b>(y, x)
     static void ptrColorReduce(Mat &inputImage, Mat &outputImage, int div);
 
     // learn 使用forEach访问像素 https://learnopencv.com/parallel-pixel-access-in-opencv-using-foreach/

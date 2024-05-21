@@ -34,49 +34,52 @@ int main()
 //    trackbar.createTrackBar();
 //    trackbar.createContrastAndBrightTrackBar();
 
-Mat srcImage = imread(R"(D:\code\LearnOpencv\input\6000-4000.jpg)");
+//    Mat srcImage = imread(R"(D:\code\LearnOpencv\input\6000-4000.jpg)");
+//
+//    Mat dstImage;
+//    dstImage.create(srcImage.rows, srcImage.cols, srcImage.type());
+//
+//    double time0 = static_cast<double>(getTickCount());
+//
+//    pixOperator::forEachColorReduce(srcImage, dstImage, 32);
+////    imshow("dstImage", dstImage);
+//    time0 = ((double) getTickCount() - time0) / getTickFrequency();
+//    waitKey(0);
+//
+//    return 0;
 
-    Mat dstImage;
-    dstImage.create(srcImage.rows, srcImage.cols, srcImage.type());
-
-    double time0 = static_cast<double>(getTickCount());
-
-    pixOperator::forEachColorReduce(srcImage, dstImage, 32);
-//    imshow("dstImage", dstImage);
-    time0 = ((double) getTickCount() - time0) / getTickFrequency();
-    waitKey(0);
-
-    return 0;
-
-    cv::Mat m = cv::Mat::ones(600, 400, CV_64F);
-    m.convertTo(m,CV_32F);
-    std::cout << m << std::endl;
+    cv::Mat m = cv::Mat::zeros(300, 300, CV_32F);
+//    std::cout << m << std::endl;
     // 定义子矩阵的左上角坐标和宽高
     int i0 = 100; // 左上角的 x 坐标
-    int i1 = 50;  // 左上角的 y 坐标
-    int w = 200;  // 子矩阵的宽度
-    int h = 150;  // 子矩阵的高度
+    int j0 = 50;  // 左上角的 y 坐标
+    int w = 100;  // 子矩阵的宽度
+    int h = 50;  // 子矩阵的高度
 
-    cv::Rect roi(i0, i1, w, h);
+    cv::Rect roi(i0, j0, w, h);
 
-    cv::Mat tmpMat = m(roi);
-    cv::Mat subMat;
-    tmpMat.copyTo(subMat);
+    cv::Mat subMat = m(roi);
 
     // 输出子矩阵的大小
     std::cout << "SubMat size: " << subMat.size() << std::endl;
 
     // 输出子矩阵的前几个元素以验证
-    std::cout << "SubMat first element: " << subMat.at<double>(0, 0) << std::endl;
+    std::cout << "SubMat first element: " << subMat.at<float>(0, 0) << std::endl;
 
     // 验证子矩阵的范围
-    std::cout << "Original matrix element at (i1, i0): " << m.at<double>(i1, i0) << std::endl;
-    std::cout << "Original matrix element at (i1 + h - 1, i0 + w - 1): " << m.at<double>(i1 + h - 1, i0 + w - 1) << std::endl;
-
+    std::cout << "Original matrix element at (i1, i0): " << m.at<float>(j0, i0) << std::endl;
+    std::cout << "Original matrix element at (i1 + h - 1, i0 + w - 1): " << m.at<float>(j0 + h - 1, i0 + w - 1) << std::endl;
     // 修改子矩阵并验证原矩阵变化
-    subMat.at<double>(0, 0) = 99.0;
-    std::cout << "Modified subMat first element: " << subMat.at<double>(0, 0) << std::endl;
-    std::cout << "Original matrix element at (i1, i0) after modification: " << m.at<double>(i1, i0) << std::endl;
+
+    for (int i = 0; i < subMat.rows; i++) {
+        for (int j = 0; j < subMat.cols; j++) {
+            subMat.at<float>(i, j) = 2;  //蓝色通道
+        }
+    }
+//    imshow("Alpha",m);
+
+    std::cout << "Modified subMat first element: " << subMat.at<float>(0, 0) << std::endl;
+    std::cout << "Original matrix element at (i1, i0) after modification: " << m.at<float>(j0, i0) << std::endl;
 
 
 
@@ -92,6 +95,7 @@ Mat srcImage = imread(R"(D:\code\LearnOpencv\input\6000-4000.jpg)");
 ////
 //    imwrite("Alpha.png", mat,compression_params);
 //    imshow("Alpha",mat);
+    waitKey(0);
 
 	return 0;
 }
