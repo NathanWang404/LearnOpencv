@@ -34,7 +34,7 @@ int main() {
 //    trackbar.createTrackBar();
 //    trackbar.createContrastAndBrightTrackBar();
 
-//    Mat srcImage = imread(R"(D:\code\LearnOpencv\input\6000-4000.jpg)");
+    Mat srcImage = imread(R"(D:\code\Blizzard\output\preview\oriImage\oriImage_0.png)",IMREAD_UNCHANGED);
 //
 //    Mat dstImage;
 //    dstImage.create(srcImage.rows, srcImage.cols, srcImage.type());
@@ -47,8 +47,23 @@ int main() {
 //    waitKey(0);
 //
 //    return 0;
+    cv::Mat mat1 = (cv::Mat_<float>(3, 3) << 1, 2, 3, 4, 5, 6, 7, 8, 9);
+    cv::Mat mat2 = (cv::Mat_<float>(3, 3) << 9, 8, 7, 6, 5, 4, 3, 2, 1);
+
+    cv::Mat mask = (cv::Mat_<uchar>(3, 3) << 1, 0, 1, 0, 1, 0, 1, 0, 1);
+
+    cv::Mat result;
+
+    cv::add(mat1, mat2, result, mask);
+
+    std::cout << "mat1:\n" << mat1 << std::endl;
+    std::cout << "mat2:\n" << mat2 << std::endl;
+    std::cout << "mask:\n" << mask << std::endl;
+    std::cout << "result (mat1 + mat2 with mask):\n" << result << std::endl;
+
     cvAPITest test;
     test.subMatTest();
+
 
 //	pixOperator::baseImageMat();
 //

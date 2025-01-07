@@ -13,6 +13,9 @@ using namespace cv;
 
 class pixOperator {
 public:
+    // ref:https://github.com/QianMo/OpenCV3-Intro-Book-Src.git
+    // ref : Doc/OpenCV3编程入门 (毛星云) (Z-Library).pdf
+
     //【15】利用imwrite生成透明png图像
     static void createAlphaMat(Mat &mat);
 
